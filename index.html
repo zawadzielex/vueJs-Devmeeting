@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js People List List</title>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <h2>List</h2>
+        <ul>
+            <!-- 2. Then, we're using built-in v-for directive to iterate over products -->
+            <li v-for="(p, key) in people">{{ p.name }}
+                <button v-on:click="removePerson(key)">Remove</button>
+            </li>
+        </ul>
+        <!-- 5. v-if can be helpful with conditional statements -->
+        <p v-if="!people.length">No products!</p>
+        <!-- 6. v-on adds an handler and :click is the name of the event, then goes the function to invoke -->
+        
+        <input v-model="name" v-on:keyup.enter="addPerson()" placeholder="Type name" />
+        <button v-on:click="addPerson()">Add person</button>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                people: [
+                    {
+                        id: 0,
+                        name: 'Marian'
+                    },
+                    {
+                        id: 1,
+                        name: 'Bogdan'
+                    }
+                ],
+                name: ''
+            },
+            methods: {
+                addPerson() {
+                    this.people.push({
+                        id: this.people.length,
+                        name: this.name
+                    });
+                    this.name = '';
+                },
+                removePerson(id) {
+                    this.people.splice(id, 1);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
